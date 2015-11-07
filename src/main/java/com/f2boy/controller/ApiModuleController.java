@@ -18,7 +18,7 @@ import java.util.Map;
  * Controller - 接口模块
  */
 @Controller
-@RequestMapping("/api_module")
+@RequestMapping("/admin/api_module")
 public class ApiModuleController extends BaseController {
 
     @Autowired

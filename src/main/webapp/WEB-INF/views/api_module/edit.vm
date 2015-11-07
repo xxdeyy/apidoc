@@ -1,23 +1,25 @@
 <div>
+  <ol class="breadcrumb">
+    <li>接口模版</li>
+    <li>添加\编辑接口模块</li>
+  </ol>
 
-  <p class="text-center">添加\编辑接口模块</p>
-
-  <form id="inputForm" class="form-horizontal" action="#springUrl('')/api_module/save" method="post">
+  <form id="inputForm" class="form-horizontal" action="#springUrl('')/admin/api_module/save" method="post">
     <input type="hidden" name="id" value="$!{module.id}" />
     <div class="form-group">
-      <label for="name" class="col-sm-5 control-label">名称 :</label>
+      <label for="name" class="col-sm-2 control-label">名称 :</label>
       <div class="col-sm-3">
         <input type="text" class="form-control" id="name" name="name" value="$!{module.name}" />
       </div>
     </div>
     <div class="form-group">
-      <label for="sortNo" class="col-sm-5 control-label">排序号 :</label>
+      <label for="sortNo" class="col-sm-2 control-label">排序号 :</label>
       <div class="col-sm-1">
         <input type="text" class="form-control" id="sortNo" name="sortNo" value="$!{module.sortNo}" />
       </div>
     </div>
     <div class="form-group">
-      <div class="col-sm-offset-5 col-sm-3">
+      <div class="col-sm-offset-2 col-sm-3">
         <button id="submit_btn" type="button" class="btn btn-default">提交</button>
       </div>
     </div>
@@ -46,7 +48,7 @@
         dataType: "json",
         success: function (msg) {
           if (msg.code == 1) {
-            location.href = "#springUrl('')/api_module/list";
+            location.href = "#springUrl('')/admin/api_module/list";
           } else if (msg.code == 0) {
             alert(msg.info);
           }

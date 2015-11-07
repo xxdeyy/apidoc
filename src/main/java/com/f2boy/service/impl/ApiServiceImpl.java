@@ -58,8 +58,12 @@ public class ApiServiceImpl implements ApiService {
      */
     @Override
     public void save(Api api) {
-        if (api == null || api.getModuleId() == null) {
+        if (api == null) {
             return;
+        }
+
+        if (api.getModuleId() == null) {
+            api.setModuleId(0);
         }
 
         if (api.getSortNo() == null || api.getSortNo() <= 0) {
@@ -98,6 +102,11 @@ public class ApiServiceImpl implements ApiService {
      */
     @Override
     public int calculateMaxSortNo(int moduleId) {
+
+        if (moduleId <= 0) {
+            return 0;
+        }
+
         List<Api> apis = findByModule(moduleId);
 
         if (apis.isEmpty()) {

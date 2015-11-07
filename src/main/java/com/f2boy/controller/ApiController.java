@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/admin/api")
 public class ApiController extends BaseController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class ApiController extends BaseController {
         ModelAndView mav = new ModelAndView();
 
         List<Api> list;
-        if (moduleId == null) {
+        if (moduleId == null || moduleId < 0) {
             list = apiService.allApi();
         } else {
             list = apiService.findByModule(moduleId);
@@ -57,13 +57,14 @@ public class ApiController extends BaseController {
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("api", apiService.find(id));
+        mav.addObject("modules", apiModuleService.allModule());
 
         mav.setViewName("api/detail");
         return mav;
     }
 
     /**
-     * 添加接口页面
+     * 添加\编辑接口页面
      */
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView edit(@RequestParam(required = false, defaultValue = "0") int id, Integer moduleId) {
@@ -102,11 +103,6 @@ public class ApiController extends BaseController {
         map.put("code", 0);
         map.put("info", "添加失败");
 
-        if (api.getModuleId() == null) {
-            map.put("info", "模块必须指定");
-            return map;
-        }
-
         if (StringUtils.isBlank(api.getName())) {
             map.put("info", "名称不能为空");
             return map;
@@ -125,6 +121,10 @@ public class ApiController extends BaseController {
         if (StringUtils.isBlank(api.getResponse())) {
             map.put("info", "响应参数不能为空");
             return map;
+        }
+
+        if (api.getModuleId() == null || api.getModuleId() < 0) {
+            api.setModuleId(0);
         }
 
         if (api.getParams() != null) {

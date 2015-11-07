@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-sm-offset-6 col-sm-6">
       <p class="text-right">
-        <a class="btn btn-info" href="#springUrl('')/api/edit">添加</a>
+        <a class="btn btn-info" href="#springUrl('')/admin/api/edit">添加</a>
       </p>
     </div>
   </div>
@@ -15,8 +15,8 @@
   <table class="table table-bordered">
     <tr>
       <th>模块名称</th>
-      <th>URI</th>
       <th>名称</th>
+      <th>URI</th>
       <th>排序号</th>
       <th>操作</th>
     </tr>
@@ -30,11 +30,11 @@
           #end
         #end
         <td>$moduleName</td>
+        <td><a href="#springUrl('')/admin/api/detail?id=${ele.id}">$ele.name</a></td>
         <td>$ele.uri</td>
-        <td>$ele.name</td>
         <td>$ele.sortNo</td>
         <td>
-          <a href="#springUrl('')/api/edit?id=${ele.id}">修改</a>
+          <a href="#springUrl('')/admin/api/edit?id=${ele.id}">修改</a>
           <a href="javascript:void(0)" onclick="doDelete(${ele.id}, '${ele.name}')">删除</a>
         </td>
       </tr>
@@ -47,7 +47,7 @@
   function doDelete(id, name) {
     if (confirm("确定要删除[" + name + "]吗？")) {
       $.ajax({
-        url: "#springUrl('')/api/delete?id=" + id,
+        url: "#springUrl('')/admin/api/delete?id=" + id,
         type: 'post',
         dataType: "json",
         success: function (msg) {

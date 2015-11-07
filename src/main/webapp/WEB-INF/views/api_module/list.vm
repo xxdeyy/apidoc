@@ -1,12 +1,13 @@
-<div style="width: 80%; margin: auto;">
+<div>
+  <ol class="breadcrumb">
+    <li>接口模版</li>
+    <li>模版列表</li>
+  </ol>
 
   <div class="row">
-    <div class="col-sm-6">
-      <h4>接口模块列表</h4>
-    </div>
-    <div class="col-sm-6">
+    <div class="col-sm-offset-6 col-sm-6">
       <p class="text-right">
-        <a class="btn btn-info" href="#springUrl('')/api_module/edit">添加</a>
+        <a class="btn btn-info" href="#springUrl('')/admin/api_module/edit">添加</a>
       </p>
     </div>
   </div>
@@ -22,7 +23,7 @@
         <td>$ele.name</td>
         <td>$ele.sortNo</td>
         <td>
-          <a href="#springUrl('')/api_module/edit?id=${ele.id}">修改</a>
+          <a href="#springUrl('')/admin/api_module/edit?id=${ele.id}">修改</a>
           <a href="javascript:void(0)" onclick="doDelete(${ele.id}, '${ele.name}')">删除</a>
         </td>
       </tr>
@@ -35,7 +36,7 @@
   function doDelete(id, name) {
     if (confirm("确定要删除[" + name + "]吗？")) {
       $.ajax({
-        url: "#springUrl('')/api_module/delete?id=" + id,
+        url: "#springUrl('')/admin/api_module/delete?id=" + id,
         type: 'post',
         dataType: "json",
         success: function (msg) {

@@ -65,8 +65,8 @@
           </div>
           <div id="api_module" class="panel-collapse collapse" role="tabpanel">
             <div class="list-group">
-              <a class="list-group-item" href="#springUrl('')/api_module/list">模板列表</a>
-              <a class="list-group-item" href="#springUrl('')/api_module/edit">编辑模板</a>
+              <a class="list-group-item" href="#springUrl('')/admin/api_module/list">模板列表</a>
+              <a class="list-group-item" href="#springUrl('')/admin/api_module/edit">新增模板</a>
             </div>
           </div>
         </div>
@@ -78,8 +78,8 @@
           </div>
           <div id="api" class="panel-collapse collapse" role="tabpanel">
             <div class="list-group">
-              <a class="list-group-item" href="#springUrl('')/api/list">接口列表</a>
-              <a class="list-group-item" href="#springUrl('')/api/edit">编辑接口</a>
+              <a class="list-group-item" href="#springUrl('')/admin/api/list">接口列表</a>
+              <a class="list-group-item" href="#springUrl('')/admin/api/edit">新增接口</a>
             </div>
           </div>
         </div>
