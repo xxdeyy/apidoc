@@ -1,0 +1,68 @@
+<div style="width: 80%; margin: auto;">
+
+  <div class="row">
+    <div class="col-sm-6">
+      <h4>
+      #if ($type == 'MODULE')
+              模块列表
+      #elseif ($type == 'FUNCTION')
+              菜单列表
+      #else
+              模块列表
+      #end
+      </h4>
+    </div>
+    <div class="col-sm-6">
+      <p class="text-right">
+        #if ($type == 'FUNCTION')
+          <a class="btn btn-info" href="#springUrl('')/module/list?type=MODULE">返回模块列表</a>
+          <a class="btn btn-info" href="#springUrl('')/module/tosave?type=FUNCTION&parentId=$!parentId">添加</a>
+        #else
+          <a class="btn btn-info" href="#springUrl('')/module/tosave?type=MODULE">添加</a>
+        #end
+      </p>
+    </div>
+  </div>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>#</th>
+      <th>名称</th>
+      <th>编码</th>
+      <th>说明</th>
+      <th>状态</th>
+      <th>修改时间</th>
+      <th>操作</th>
+    </tr>
+    #foreach ($ele in $list)
+      <tr>
+        <th scope="row">$velocityCount</th>
+        <td>$ele.moduleName</td>
+        <td>$ele.code</td>
+        <td>$!ele.remark</td>
+        <td>
+          #if ($ele.status == 'ENABLED')
+                      可用
+          #elseif ($ele.status == 'DISABLED')
+                      禁用
+          #elseif ($ele.status == 'LOCKED')
+                      锁定
+          #elseif ($ele.status == 'EXPIRED')
+                      过期
+          #else
+                      未知
+          #end
+        </td>
+        <td>$!dateTool.format("yyyy-MM-dd HH:mm", $!{ele.updateAt})</td>
+        <td>
+          <a class="btn btn-info" href="#springUrl('')/module/tosave?type=$type&id=$ele.id&parentId=$!parentId">修改</a>
+          <a class="btn btn-info" href="#springUrl('')/module/delete?id=$ele.id">删除</a>
+          #if ($type == 'MODULE')
+            <a class="btn btn-info" href="#springUrl('')/module/list?type=FUNCTION&parentId=$ele.id">查看子菜单</a>
+          #end
+        </td>
+      </tr>
+    <tr>
+    #end
+  </table>
+</div>

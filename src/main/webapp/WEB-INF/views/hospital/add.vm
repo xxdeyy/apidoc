@@ -1,0 +1,71 @@
+<div>
+
+  <p class="text-center">添加牙科</p>
+
+  <form id="inputForm" class="form-horizontal" action="" method="post">
+    <div class="form-group">
+      <label for="hospTName" class="col-sm-5 control-label">牙科名称</label>
+
+      <div class="col-sm-3">
+        <input type="text" class="form-control" id="hospTName" name="hospTName" placeholder="XX牙科">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="hospName" class="col-sm-5 control-label">牙科登录后缀</label>
+
+      <div class="col-sm-3">
+        <input type="text" class="form-control" id="hospName" name="hospName" placeholder="xxxx.com">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email" class="col-sm-5 control-label">联系邮箱</label>
+
+      <div class="col-sm-3">
+        <input type="email" class="form-control" id="email" name="email" placeholder="电子邮箱">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-5 col-sm-3">
+        <button id="submit_btn" type="button" class="btn btn-default">提交</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  $(document).ready(function () {
+
+    $('#hospTName').focus();
+
+    $('#submit_btn').click(function () {
+      login();
+    });
+
+    $(document).keydown(function (e) {
+      if (e.keyCode == 13) {
+        login();
+      }
+    });
+
+    function login() {
+      $('#inputForm').ajaxSubmit({
+        beforeSubmit: checkForm,
+        dataType: "json",
+        success: function (msg) {
+          if (msg.code == 1) {
+            location.href = "#springUrl('')/hospital/list";
+          } else if (msg.code == 0) {
+            alert(msg.info);
+          }
+        }
+      });
+    }
+
+    var checkForm = function () {
+      return true;
+    };
+
+  });
+
+</script>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tools>
+
+  <toolbox scope="application">
+    <tool key="mathTool" class="org.apache.velocity.tools.generic.MathTool" />
+    <tool key="displayTool" class="org.apache.velocity.tools.generic.DisplayTool" />
+    <tool key="env" class="com.f2boy.Environment" />
+    <tool key="stringUtils" class="org.apache.commons.lang.StringUtils" />
+  </toolbox>
+
+</tools>
+

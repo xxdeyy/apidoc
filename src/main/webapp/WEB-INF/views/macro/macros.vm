@@ -1,0 +1,70 @@
+## 页面分页条
+#macro(pagination $pageNumber $totalPages)
+
+  <input type="hidden" id="pageSize" name="pageSize" value="$!{page.pageSize}" />
+  <input type="hidden" id="searchProperty" name="searchProperty" value="$!{page.searchProperty}" />
+  <input type="hidden" id="orderProperty" name="orderProperty" value="$!{page.orderProperty}" />
+  <input type="hidden" id="orderDirection" name="orderDirection" value="$!{page.orderDirection}" />
+
+  ##pageCount
+  #if($totalPages > 5)
+    #set($start = $pageNumber - 1)
+    #if($start < 1)
+      #set($start = 1)
+    #end
+    #set($end = $start + 2)
+    #if($end > $totalPages)
+      #set($end = $totalPages)
+      #set($start = $end - 2)
+    #end
+  #else
+    #set($start = 1)
+    #set($end = $totalPages)
+  #end
+  #set($prePage = $pageNumber - 1)
+  #set($nextPage = $pageNumber + 1)
+
+  #if ($totalPages > 1)
+    <div class="pagination">
+
+      #if ($pageNumber == 1)
+        <span class="firstPage">&nbsp;</span>
+        <span class="previousPage">&nbsp;</span>
+      #else
+        <a class="firstPage" href="javascript: jQuery.pageSkip(${start});">&nbsp;</a>
+        <a class="previousPage" href="javascript: jQuery.pageSkip(${prePage});">&nbsp;</a>
+      #end
+
+      #if ($pageNumber > 2)
+        <span class="pageBreak">...</span>
+      #end
+
+      #foreach ($idx in [$start..$end])
+        #if ($idx == $pageNumber)
+          <span class="currentPage">${idx}</span>
+        #else
+          <a href="javascript: jQuery.pageSkip(${idx});">${idx}</a>
+        #end
+      #end
+
+      #if ($pageNumber < $totalPages - 2)
+        <span class="pageBreak">...</span>
+      #end
+
+      #if ($pageNumber < $totalPages)
+        <a class="nextPage" href="javascript: jQuery.pageSkip(${nextPage});">&nbsp;</a>
+        <a class="lastPage" href="javascript: jQuery.pageSkip(${totalPages});">&nbsp;</a>
+      #else
+        <span class="nextPage">&nbsp;</span>
+        <span class="lastPage">&nbsp;</span>
+      #end
+
+      <span class="pageSkip">共${totalPages}页 到第
+        <input id="pageNumber" name="pageNumber" value="${pageNumber}" maxlength="9" onpaste="return false;" />
+        <button type="submit">&nbsp;</button>
+      </span>
+
+    </div>
+  #end
+
+#end
