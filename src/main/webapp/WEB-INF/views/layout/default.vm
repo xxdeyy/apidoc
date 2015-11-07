@@ -93,7 +93,10 @@
 
   </div>
 
-  <div class="footer" style="margin-top: 30px;">
+  <!-- 清除浮动 -->
+  <div class="clearfix"></div>
+
+  <div class="footer" style="margin-top: 80px;">
     <p class="text-center"><small>Copyright © 2015-2099 f2boy. All Rights Reserved.</small></p>
     <p class="text-center"><small>火星备7758-521号</small></p>
   </div>

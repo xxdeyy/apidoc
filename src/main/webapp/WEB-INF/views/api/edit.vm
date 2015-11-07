@@ -18,6 +18,12 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="name" class="col-sm-2 control-label"><i class="must-star">*</i>名称 :</label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" id="name" name="name" value="$!{api.name}" />
+      </div>
+    </div>
+    <div class="form-group">
       <label for="uri" class="col-sm-2 control-label"><i class="must-star">*</i>URI :</label>
       <div class="col-sm-3">
         <input type="text" class="form-control" id="uri" name="uri" value="$!{api.uri}" />
@@ -32,12 +38,6 @@
         <label class="radio-inline">
           <input type="radio" name="method" value="POST" #if($api.method == 'POST') checked #end>POST
         </label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="name" class="col-sm-2 control-label"><i class="must-star">*</i>名称 :</label>
-      <div class="col-sm-3">
-        <input type="text" class="form-control" id="name" name="name" value="$!{api.name}" />
       </div>
     </div>
     <div class="form-group">
@@ -131,6 +131,10 @@
     var checkForm = function () {
       return true;
     };
+
+    // 初始textarea大小
+    var elem = $("textarea")[0];
+    elem.style.height = elem.scrollHeight + 'px';
 
   });
 

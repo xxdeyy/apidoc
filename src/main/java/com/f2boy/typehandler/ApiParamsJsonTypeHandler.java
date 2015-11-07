@@ -27,7 +27,9 @@ public class ApiParamsJsonTypeHandler extends BaseTypeHandler<ApiParams> {
     public ApiParams getNullableResult(ResultSet rs, String columnName) throws SQLException {
 
         ApiParams apiParams = JsonUtils.json2Object(rs.getString(columnName), ApiParams.class);
-        Collections.sort(apiParams);
+        if (apiParams != null) {
+            Collections.sort(apiParams);
+        }
 
         return apiParams;
     }
@@ -36,7 +38,9 @@ public class ApiParamsJsonTypeHandler extends BaseTypeHandler<ApiParams> {
     public ApiParams getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
 
         ApiParams apiParams = JsonUtils.json2Object(rs.getString(columnIndex), ApiParams.class);
-        Collections.sort(apiParams);
+        if (apiParams != null) {
+            Collections.sort(apiParams);
+        }
 
         return apiParams;
     }
@@ -45,7 +49,9 @@ public class ApiParamsJsonTypeHandler extends BaseTypeHandler<ApiParams> {
     public ApiParams getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
 
         ApiParams apiParams = JsonUtils.json2Object(cs.getString(columnIndex), ApiParams.class);
-        Collections.sort(apiParams);
+        if (apiParams != null) {
+            Collections.sort(apiParams);
+        }
 
         return apiParams;
     }

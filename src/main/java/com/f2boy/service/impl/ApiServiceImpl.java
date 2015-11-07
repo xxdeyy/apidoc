@@ -22,7 +22,7 @@ public class ApiServiceImpl implements ApiService {
     public List<Api> allApi() {
         ApiExample example = new ApiExample();
 
-        example.setOrderByClause("sort_no asc");
+        example.setOrderByClause("module_id asc, sort_no asc");
         return apiMapper.selectByExample(example);
     }
 

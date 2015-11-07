@@ -1,53 +1,50 @@
 <div>
   <ol class="breadcrumb">
     <li>接口</li>
-    <li>添加\编辑接口</li>
+    <li>接口详情</li>
   </ol>
 
-  <form id="inputForm" class="form-horizontal" action="#springUrl('')/admin/api/save" method="post">
-    <input type="hidden" name="id" value="$!{api.id}" />
+  <form id="detailForm" class="form-horizontal">
     <div class="form-group">
-      <label for="moduleId" class="col-sm-2 control-label">模块 :</label>
+      <label class="col-sm-2 control-label">模块 :</label>
       <div class="col-sm-3">
-        <select class="form-control" id="moduleId" name="moduleId">
-          <option value="">请选择模块</option>
+        <p class="form-control-static">
+          #set($moduleName = "--")
           #foreach ($ele in $modules)
-            <option value="$ele.id" #if($ele.id == $!{api.moduleId}) selected #end>$ele.name</option>
+            #if($ele.id == $!{api.moduleId})
+              #set($moduleName = $ele.name)
+            #end
           #end
-        </select>
+          $moduleName
+        </p>
       </div>
     </div>
     <div class="form-group">
-      <label for="uri" class="col-sm-2 control-label"><i class="must-star">*</i>URI :</label>
+      <label class="col-sm-2 control-label">名称 :</label>
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="uri" name="uri" value="$!{api.uri}" />
+        <p class="form-control-static">$!{api.name}</p>
       </div>
     </div>
     <div class="form-group">
-      <label for="method" class="col-sm-2 control-label"><i class="must-star">*</i>METHOD :</label>
+      <label class="col-sm-2 control-label">URI :</label>
       <div class="col-sm-3">
-        <label class="radio-inline">
-          <input type="radio" name="method" value="GET" #if($api.method == 'GET') checked #end>GET
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="method" value="POST" #if($api.method == 'POST') checked #end>POST
-        </label>
+        <p class="form-control-static">$!{api.uri}</p>
       </div>
     </div>
     <div class="form-group">
-      <label for="name" class="col-sm-2 control-label"><i class="must-star">*</i>名称 :</label>
+      <label class="col-sm-2 control-label">METHOD :</label>
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="name" name="name" value="$!{api.name}" />
+        <p class="form-control-static">$!{api.method}</p>
       </div>
     </div>
     <div class="form-group">
-      <label for="function" class="col-sm-2 control-label">用途 :</label>
+      <label class="col-sm-2 control-label">用途 :</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="function" name="function" value="$!{api.function}" />
+        <p class="form-control-static">$!{api.function}</p>
       </div>
     </div>
     <div class="form-group">
-      <label for="params" class="col-sm-2 control-label">请求参数 :</label>
+      <label class="col-sm-2 control-label">请求参数 :</label>
       <div class="col-sm-10">
         <table class="table table-bordered" id="paramsTable">
           <tr>
@@ -56,110 +53,54 @@
             <th width="10%">是否必需</th>
             <th>说明</th>
             <th width="8%">排序号</th>
-            <th width="8%">操作</th>
           </tr>
           #foreach($ele in $api.params)
             #set($idx = $velocityCount - 1)
             <tr>
-              <td><input type="text" class="form-control" name="params[$idx].key" value="$!{ele.key}" /></td>
-              <td><input type="text" class="form-control" name="params[$idx].type" value="$!{ele.type}" /></td>
+              <td><p class="form-control-static">$!{ele.key}</p></td>
+              <td><p class="form-control-static">$!{ele.type}</p></td>
               <td>
-                <div class="checkbox text-center">
-                  <label>
-                    <input type="checkbox" name="params[$idx].required" #if($!{ele.required}) checked #end />
-                  </label>
-                </div>
+                <p class="form-control-static text-center">
+                  #if($!{ele.required}) <b style="color: red;">是</b> #else <span class="text-muted">否</span> #end
+                </p>
               </td>
-              <td><input type="text" class="form-control" name="params[$idx].description" value="$!{ele.description}" /></td>
-              <td><input type="text" class="form-control" name="params[$idx].sortNo" value="$!{ele.sortNo}" /></td>
-              <td><a class="btn btn-info" href="javascript:void(0)" onclick="deleteParam(this)">删除</a></td>
+              <td><p class="form-control-static">$!{ele.description}</p></td>
+              <td><p class="form-control-static">$!{ele.sortNo}</p></td>
             </tr>
           #end
         </table>
       </div>
     </div>
     <div class="form-group">
-      <div class="col-sm-2"></div>
-      <div class="col-sm-3">
-        <a class="btn btn-info" href="javascript:void(0)" onclick="addParam()">新增参数</a>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="response" class="col-sm-2 control-label"><i class="must-star">*</i>返回数据 :</label>
+      <label class="col-sm-2 control-label">返回数据 :</label>
       <div class="col-sm-10">
-        <textarea class="form-control" id="response" name="response" rows="15">$!{api.response}</textarea>
+        <textarea class="form-control" readonly style="border: 0;resize: none;">$!{api.response}</textarea>
       </div>
     </div>
     <div class="form-group">
-      <label for="memo" class="col-sm-2 control-label">备注 :</label>
+      <label class="col-sm-2 control-label">备注 :</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="memo" name="memo" value="$!{api.memo}" />
+        <p class="form-control-static">$!{api.memo}</p>
       </div>
     </div>
     <div class="form-group">
-      <label for="sortNo" class="col-sm-2 control-label">排序号 :</label>
+      <label class="col-sm-2 control-label">排序号 :</label>
       <div class="col-sm-1">
-        <input type="text" class="form-control" id="sortNo" name="sortNo" value="$!{api.sortNo}" />
+        <p class="form-control-static">$!{api.sortNo}</p>
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-3">
-        <button id="submit_btn" type="button" class="btn btn-default">提交</button>
+        <a class="btn btn-info" href="#springUrl('')/admin/api/edit?id=$api.id">修改</a>
       </div>
     </div>
   </form>
 </div>
 
-<script type="text/javascript">
 
-  $(document).ready(function () {
-
-    $('#submit_btn').click(function () {
-      $('#inputForm').ajaxSubmit({
-        beforeSubmit: checkForm,
-        dataType: "json",
-        success: function (msg) {
-          if (msg.code == 1) {
-            location.href = "#springUrl('')/admin/api/list";
-          } else if (msg.code == 0) {
-            alert(msg.info);
-          }
-        }
-      });
-    });
-
-    var checkForm = function () {
-      return true;
-    };
-
-  });
-
-  function deleteParam(elem) {
-    $(elem).parent().parent().remove();
-  }
-
-  #if($api.params)
-    var newParamIndex = ${api.params.size()};
-  #else
-    var newParamIndex = 0;
-  #end
-  function addParam() {
-    var dom = '<tr>'
-            + '  <td><input type="text" class="form-control" name="params[paramIndex].key" /></td>'
-            + '  <td><input type="text" class="form-control" name="params[paramIndex].type" /></td>'
-            + '  <td>'
-            + '    <div class="checkbox text-center">'
-            + '      <label><input type="checkbox" name="params[paramIndex].required" /></label>'
-            + '    </div>'
-            + '  </td>'
-            + '  <td><input type="text" class="form-control" name="params[paramIndex].description" /></td>'
-            + '  <td><input type="text" class="form-control" name="params[paramIndex].sortNo" value="paramSortNo" /></td>'
-            + '  <td><a class="btn btn-info" href="javascript:void(0)" onclick="deleteParam(this)">删除</a></td>'
-            + '</tr>';
-
-    dom = dom.replace(/paramIndex/g, newParamIndex++);
-    dom = dom.replace("paramSortNo", newParamIndex);
-    $("#paramsTable").append($(dom));
-  }
-
+<script>
+$(document).ready(function(){
+    var elem = $("textarea")[0];
+    elem.style.height = elem.scrollHeight + 'px';
+});
 </script>
