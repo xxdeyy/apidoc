@@ -50,25 +50,8 @@
 
   <mvc:interceptors>
     <mvc:interceptor>
-      <mvc:mapping path="/**" />
-      <bean class="com.f2boy.interceptor.AdminInterceptor">
-        <property name="excludeUrls">
-          <list>
-            <value>/</value>
-            <value>/login</value>
-            <value>/logout</value>
-            <value>/register</value>
-            <value>/static/</value>
-            <value>/storage/</value>
-            <value>/upload/</value>
-            <value>/success/</value>
-            <value>/captcha.jpg</value>
-            <value>/favicon.ico</value>
-            <value>/robots.txt</value>
-            <value>/index.html</value>
-          </list>
-        </property>
-      </bean>
+      <mvc:mapping path="/admin/**" />
+      <bean class="com.f2boy.interceptor.AdminInterceptor" />
     </mvc:interceptor>
   </mvc:interceptors>
 

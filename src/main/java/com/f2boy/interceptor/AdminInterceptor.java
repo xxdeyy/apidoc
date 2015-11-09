@@ -11,7 +11,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,25 +24,9 @@ public class AdminInterceptor implements HandlerInterceptor {
      */
     private static final String loginUrl = "/login";
 
-    // 排除的url
-    private List<String> excludeUrls;
-
-    public void setExcludeUrls(List<String> excludeUrls) {
-        this.excludeUrls = excludeUrls;
-    }
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-
-        String requestUri = request.getRequestURI();
-        String apiRoute = requestUri.substring(request.getContextPath().length());
-
-        for (String s : excludeUrls) {
-            if (apiRoute.startsWith(s)) {
-                return true;
-            }
-        }
 
         Admin admin = AdminUtils.getCurrentAdmin(request, response);
 

@@ -34,7 +34,7 @@ public class LoginController extends BaseController {
         Admin admin = AdminUtils.getCurrentAdmin(request, response);
 
         if (admin != null) {
-            return "redirect:/";
+            return "redirect:/admin";
         }
 
         return "login";
