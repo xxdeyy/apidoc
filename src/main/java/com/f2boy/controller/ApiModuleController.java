@@ -1,5 +1,6 @@
 package com.f2boy.controller;
 
+import com.f2boy.CommonStatic;
 import com.f2boy.domain.entity.ApiModule;
 import com.f2boy.service.ApiModuleService;
 import org.apache.commons.lang.StringUtils;
@@ -33,6 +34,7 @@ public class ApiModuleController extends BaseController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("list", apiModuleService.allModule());
 
+        mav.addObject(CommonStatic.PAGE_TITLE_VAR, "接口模块列表");
         mav.setViewName("api_module/list");
         return mav;
     }
@@ -57,6 +59,7 @@ public class ApiModuleController extends BaseController {
 
         mav.addObject("module", module);
 
+        mav.addObject(CommonStatic.PAGE_TITLE_VAR, "新增\\编辑接口模块");
         mav.setViewName("api_module/edit");
         return mav;
     }

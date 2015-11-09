@@ -56,11 +56,11 @@
         </div>
       #end
 
-      ## 没指定模板的接口
+      ## 没指定模块的接口
       <div class="panel panel-info">
         <div class="panel-heading" role="tab">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#navmenu" href="#menuCollapse-noModule">**未指定模板</a>
+            <a data-toggle="collapse" data-parent="#navmenu" href="#menuCollapse-noModule">**未指定模块</a>
           </h4>
         </div>
         <div id="menuCollapse-noModule" class="panel-collapse collapse" role="tabpanel">
@@ -77,10 +77,59 @@
 
   <div class="col-md-10">
 
+    <h2 class="page-header" style="margin-top: 0;"><a href="#">概览</a></h2>
+    <h3>响应格式说明</h3>
+    <p>响应数据包以json格式输出，内容都是UTF-8编码。响应json的约定格式如下：</p>
+    <table class="table table-bordered">
+      <tr>
+        <th width="15%">参数名</th>
+        <th width="15%">类型</th>
+        <th>描述</th>
+      </tr>
+      <tr>
+        <td>code</td>
+        <td>int</td>
+        <td>返回结果码</td>
+      </tr>
+      <tr>
+        <td>msg</td>
+        <td>string</td>
+        <td>结果信息, 如“成功添加处置”</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>json</td>
+        <td>返回结果数据</td>
+      </tr>
+    </table>
+    <p><strong>注：返回的数据里面，如果字段为null，则结果的json不包含此字段</strong></p>
+    <h3>全局返回码说明</h3>
+    <table class="table table-bordered">
+      <tr>
+        <th width="15%">返回码</th>
+        <th>说明</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>成功</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>失败</td>
+      </tr>
+      <tr>
+        <td>900</td>
+        <td>未知错误</td>
+      </tr>
+      <tr>
+        <td>9xx</td>
+        <td>某些具体的错误</td>
+      </tr>
+    </table>
+
     #foreach($module in $modules)
-      #set($currModule = $velocityCount)
       #foreach ($api in ${moduleApiMap.get($module.id)})
-        <h2 id="${api.uri}" class="page-header" #if($currModule==1 && $velocityCount==1) style="margin-top: 0;" #end>
+        <h2 id="${api.uri}" class="page-header">
           <a href="#${api.uri}">${api.name}</a><small>$!{api.function}</small>
         </h2>
 

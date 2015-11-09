@@ -1,5 +1,6 @@
 package com.f2boy.controller;
 
+import com.f2boy.CommonStatic;
 import com.f2boy.domain.entity.Api;
 import com.f2boy.domain.jsondo.ApiParams;
 import com.f2boy.service.ApiModuleService;
@@ -45,6 +46,7 @@ public class ApiController extends BaseController {
         mav.addObject("list", list);
         mav.addObject("modules", apiModuleService.allModule());
 
+        mav.addObject(CommonStatic.PAGE_TITLE_VAR, "接口列表");
         mav.setViewName("api/list");
         return mav;
     }
@@ -59,6 +61,7 @@ public class ApiController extends BaseController {
         mav.addObject("api", apiService.find(id));
         mav.addObject("modules", apiModuleService.allModule());
 
+        mav.addObject(CommonStatic.PAGE_TITLE_VAR, "接口详情");
         mav.setViewName("api/detail");
         return mav;
     }
@@ -89,6 +92,7 @@ public class ApiController extends BaseController {
         mav.addObject("api", api);
         mav.addObject("modules", apiModuleService.allModule());
 
+        mav.addObject(CommonStatic.PAGE_TITLE_VAR, "新增\\编辑接口");
         mav.setViewName("api/edit");
         return mav;
     }
