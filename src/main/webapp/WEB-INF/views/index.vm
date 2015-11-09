@@ -10,19 +10,13 @@
   <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugin/bootstrap/css/bootstrap.css" />
   <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugin/bootstrap/css/bootstrap-theme.css" />
   <style>
-    body {
-      /*padding-top: 70px;*/
-    }
-
     #navmenu .panel-heading a {
       display: block;
       text-decoration: none;
     }
 
-    /* 必填项的星星图标 */
-    .must-star {
-      color: red;
-      padding-right: 4px;
+    .form-group{
+      margin-bottom: 0;
     }
   </style>
 
@@ -47,7 +41,7 @@
 
       #foreach($module in $modules)
         <div class="panel panel-info">
-          <div class="panel-heading" role="tab" id="parentMenu$velocityCount">
+          <div class="panel-heading" role="tab">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#navmenu" href="#menuCollapse$velocityCount">${module.name}</a>
             </h4>
@@ -62,18 +56,161 @@
         </div>
       #end
 
+      ## 没指定模板的接口
+      <div class="panel panel-info">
+        <div class="panel-heading" role="tab">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#navmenu" href="#menuCollapse-noModule">**未指定模板</a>
+          </h4>
+        </div>
+        <div id="menuCollapse-noModule" class="panel-collapse collapse" role="tabpanel">
+          <div class="list-group">
+            #foreach ($api in $noModuleApis)
+              <a class="list-group-item" href="#springUrl('')/#${api.uri}">${api.name}</a>
+            #end
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <div class="col-md-10">
-    <h1 id="/user/save" class="page-header">
-      <a href="#/user/save">保存用户</a>
-    </h1>
-    <h1 id="/user/delete" class="page-header">
-      <a href="#/user/delete">保存用户</a>
-    </h1>
-  </div>
 
+    #foreach($module in $modules)
+      #set($currModule = $velocityCount)
+      #foreach ($api in ${moduleApiMap.get($module.id)})
+        <h2 id="${api.uri}" class="page-header" #if($currModule==1 && $velocityCount==1) style="margin-top: 0;" #end>
+          <a href="#${api.uri}">${api.name}</a><small>$!{api.function}</small>
+        </h2>
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">名称 :</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">$!{api.name}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">URI :</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">$!{api.uri}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">METHOD :</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">$!{api.method}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">请求参数 :</label>
+            <div class="col-sm-10">
+              <table class="table table-bordered">
+                <tr>
+                  <th width="15%">key</th>
+                  <th width="15%">参数类型</th>
+                  <th width="10%">是否必需</th>
+                  <th>说明</th>
+                </tr>
+                #foreach($ele in $api.params)
+                  #set($idx = $velocityCount - 1)
+                  <tr>
+                    <td>$!{ele.key}</td>
+                    <td>$!{ele.type}</td>
+                    <td class="text-center">
+                      #if($!{ele.required}) <b style="color: red;">是</b> #else <span class="text-muted">否</span> #end
+                    </td>
+                    <td>$!{ele.description}</td>
+                  </tr>
+                #end
+              </table>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">返回数据 :</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" readonly style="border: 0;resize: none;">$!{api.response}</textarea>
+            </div>
+          </div>
+          #if(${api.memo} && $api.memo != "")
+            <div class="form-group">
+              <label class="col-sm-2 control-label">备注 :</label>
+              <div class="col-sm-8">
+                <p class="form-control-static">$!{api.memo}</p>
+              </div>
+            </div>
+          #end
+        </form>
+      #end
+    #end
+
+    #foreach ($api in $noModuleApis)
+      <h2 id="${api.uri}" class="page-header">
+        <a href="#${api.uri}">${api.name}</a><small>$!{api.function}</small>
+      </h2>
+
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">名称 :</label>
+          <div class="col-sm-3">
+            <p class="form-control-static">$!{api.name}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">URI :</label>
+          <div class="col-sm-3">
+            <p class="form-control-static">$!{api.uri}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">METHOD :</label>
+          <div class="col-sm-3">
+            <p class="form-control-static">$!{api.method}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">请求参数 :</label>
+          <div class="col-sm-10">
+            <table class="table table-bordered">
+              <tr>
+                <th width="15%">key</th>
+                <th width="15%">参数类型</th>
+                <th width="10%">是否必需</th>
+                <th>说明</th>
+              </tr>
+              #foreach($ele in $api.params)
+                #set($idx = $velocityCount - 1)
+                <tr>
+                  <td>$!{ele.key}</td>
+                  <td>$!{ele.type}</td>
+                  <td class="text-center">
+                    #if($!{ele.required}) <b style="color: red;">是</b> #else <span class="text-muted">否</span> #end
+                  </td>
+                  <td>$!{ele.description}</td>
+                </tr>
+              #end
+            </table>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">返回数据 :</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" readonly style="border: 0;resize: none;">$!{api.response}</textarea>
+          </div>
+        </div>
+        #if(${api.memo} && $api.memo != "")
+          <div class="form-group">
+            <label class="col-sm-2 control-label">备注 :</label>
+            <div class="col-sm-8">
+              <p class="form-control-static">$!{api.memo}</p>
+            </div>
+          </div>
+        #end
+      </form>
+    #end
+
+  </div>
 </div>
 
 <!-- 清除浮动 -->
@@ -86,6 +223,7 @@
 
 <script>
   $(document).ready(function(){
+
     // 把对应的左侧导航按钮设为选中状态
     var path = document.location.pathname;
     $("a.list-group-item").css("background-color", "");
@@ -96,14 +234,20 @@
       currColl.prev().find("a").click();
     }
 
+    // 保持左侧菜单距离顶部20px
     $(window).bind('scroll', function() {
       var navHeight = $("#navbar")[0].offsetHeight;
       var scrollTop = $(this).scrollTop();
-      if(scrollTop >= navHeight){
+      if (scrollTop >= navHeight) {
         $("#navmenu").css("top", "20px");
-      }else{
+      } else {
         $("#navmenu").css("top", navHeight - scrollTop + 20 + "px");
       }
+    });
+
+    // testarea区域全显示
+    $("textarea").each(function(){
+      this.style.height = this.scrollHeight + 'px';
     });
 
   });

@@ -1,3 +1,9 @@
+<style>
+  .form-group{
+    margin-bottom: 0;
+  }
+</style>
+
 <div>
   <ol class="breadcrumb">
     <li>接口</li>
@@ -57,15 +63,13 @@
           #foreach($ele in $api.params)
             #set($idx = $velocityCount - 1)
             <tr>
-              <td><p class="form-control-static">$!{ele.key}</p></td>
-              <td><p class="form-control-static">$!{ele.type}</p></td>
-              <td>
-                <p class="form-control-static text-center">
-                  #if($!{ele.required}) <b style="color: red;">是</b> #else <span class="text-muted">否</span> #end
-                </p>
+              <td>$!{ele.key}</td>
+              <td>$!{ele.type}</td>
+              <td class="text-center">
+                #if($!{ele.required}) <b style="color: red;">是</b> #else <span class="text-muted">否</span> #end
               </td>
-              <td><p class="form-control-static">$!{ele.description}</p></td>
-              <td><p class="form-control-static">$!{ele.sortNo}</p></td>
+              <td>$!{ele.description}</td>
+              <td>$!{ele.sortNo}</td>
             </tr>
           #end
         </table>
@@ -91,7 +95,7 @@
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-3">
-        <a class="btn btn-info" href="#springUrl('')/admin/api/edit?id=$api.id">修改</a>
+        <a class="btn btn-info" href="#springUrl('')/admin/api/edit?id=$api.id">&nbsp;修&nbsp;改&nbsp;</a>
       </div>
     </div>
   </form>
@@ -99,8 +103,8 @@
 
 
 <script>
-$(document).ready(function(){
+  $(document).ready(function(){
     var elem = $("textarea")[0];
     elem.style.height = elem.scrollHeight + 'px';
-});
+  });
 </script>
