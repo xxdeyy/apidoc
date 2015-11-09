@@ -5,7 +5,7 @@
 <html lang="zh">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>爱牙云管理平台</title>
+  <title>接口wiki</title>
   <link rel="shortcut icon" type="image/x-icon" href="#springUrl('')/favicon.ico?v=$env.sysVersion" media="screen" />
   <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugin/bootstrap/css/bootstrap.css" />
   <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugin/bootstrap/css/bootstrap-theme.css" />
@@ -29,7 +29,7 @@
 <nav id="navbar" class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#springUrl('')/">文档系统</a>
+      <a class="navbar-brand" href="#springUrl('')/">Wiki</a>
     </div>
   </div><!-- /.container-fluid -->
 </nav>
@@ -85,12 +85,6 @@
         </h2>
 
         <form class="form-horizontal">
-          <div class="form-group">
-            <label class="col-sm-2 control-label">名称 :</label>
-            <div class="col-sm-3">
-              <p class="form-control-static">$!{api.name}</p>
-            </div>
-          </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">URI :</label>
             <div class="col-sm-3">
@@ -151,12 +145,6 @@
       </h2>
 
       <form class="form-horizontal">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">名称 :</label>
-          <div class="col-sm-3">
-            <p class="form-control-static">$!{api.name}</p>
-          </div>
-        </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">URI :</label>
           <div class="col-sm-3">

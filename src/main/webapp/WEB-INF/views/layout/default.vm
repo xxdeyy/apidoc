@@ -5,7 +5,7 @@
 <html lang="zh">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>爱牙云管理平台</title>
+  <title>接口wiki</title>
   <link rel="shortcut icon" type="image/x-icon" href="#springUrl('')/favicon.ico?v=$env.sysVersion" media="screen" />
   <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugin/bootstrap/css/bootstrap.css" />
   <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugin/bootstrap/css/bootstrap-theme.css" />
@@ -31,14 +31,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#springUrl('')/">爱牙云</a>
-        <a class="navbar-brand" href="#springUrl('')/module/list">权限管理</a>
+        <a class="navbar-brand" href="#springUrl('')/">Wiki</a>
       </div>
 
       #if($_admin)

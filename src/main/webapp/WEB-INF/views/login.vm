@@ -1,23 +1,51 @@
-<div style="padding-top: 60px;">
-  <form id="loginForm" class="form-horizontal" action="" method="post">
-    <div class="form-group">
-      <label for="username" class="col-sm-5 control-label">用户名</label>
-      <div class="col-sm-3">
-        <input type="email" class="form-control" id="username" name="username" placeholder="用户名">
-      </div>
+#set($layout = "layout/empty.vm")
+
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>接口wiki</title>
+  <link rel="shortcut icon" type="image/x-icon" href="#springUrl('')/favicon.ico?v=$env.sysVersion" media="screen" />
+  <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugin/bootstrap/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugin/bootstrap/css/bootstrap-theme.css" />
+
+  <script type="text/javascript" src="#springUrl('')/static/plugin/jquery-2.1.3.js"></script>
+  <script type="text/javascript" src="#springUrl('')/static/plugin/jquery.form-3.46.0.js"></script>
+  <script type="text/javascript" src="#springUrl('')/static/plugin/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#springUrl('')/">Wiki</a>
     </div>
-    <div class="form-group">
-      <label for="password" class="col-sm-5 control-label">密&nbsp;码</label>
-      <div class="col-sm-3">
-        <input type="password" class="form-control" id="password" name="password" placeholder="密 码">
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div style="min-height: 300px">
+  <div style="padding-top: 60px;">
+    <form id="loginForm" class="form-horizontal" action="" method="post">
+      <div class="form-group">
+        <label for="username" class="col-sm-5 control-label">用户名</label>
+        <div class="col-sm-3">
+          <input type="email" class="form-control" id="username" name="username" placeholder="用户名">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-5 col-sm-3">
-        <button id="submit_btn" type="button" class="btn btn-default">提交</button>
+      <div class="form-group">
+        <label for="password" class="col-sm-5 control-label">密&nbsp;码</label>
+        <div class="col-sm-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="密 码">
+        </div>
       </div>
-    </div>
-  </form>
+      <div class="form-group">
+        <div class="col-sm-offset-5 col-sm-3">
+          <button id="submit_btn" type="button" class="btn btn-default">提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -42,7 +70,7 @@
         dataType : "json",
         success : function (msg) {
           if (msg.code == 1) {
-            location.href = "#springUrl('')/";
+            location.href = "#springUrl('')/admin";
           } else if (msg.code == 0) {
             alert(msg.info);
           }
