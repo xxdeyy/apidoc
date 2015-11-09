@@ -225,9 +225,9 @@
   $(document).ready(function(){
 
     // 把对应的左侧导航按钮设为选中状态
-    var path = document.location.pathname;
+    var path = window.location.hash;
     $("a.list-group-item").css("background-color", "");
-    var currItem = $("a.list-group-item[href='" + path + "']");
+    var currItem = $("a.list-group-item[href='/" + path + "']");
     currItem.css("background-color", "#f5f5f5");
     var currColl = currItem.parent().parent();
     if (!currColl.hasClass("in")) {
