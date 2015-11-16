@@ -31,6 +31,11 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="#springUrl('')/">Wiki</a>
     </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#springUrl('')/admin">进入管理界面</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
@@ -114,7 +119,7 @@
         <td>成功</td>
       </tr>
       <tr>
-        <td>2</td>
+        <td>0</td>
         <td>失败</td>
       </tr>
       <tr>
@@ -122,8 +127,8 @@
         <td>未知错误</td>
       </tr>
       <tr>
-        <td>9xx</td>
-        <td>某些具体的错误</td>
+        <td>901</td>
+        <td>用户未登录或已过期</td>
       </tr>
     </table>
 

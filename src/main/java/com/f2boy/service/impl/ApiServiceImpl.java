@@ -7,6 +7,7 @@ import com.f2boy.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class ApiServiceImpl implements ApiService {
     public List<Api> allApi() {
         ApiExample example = new ApiExample();
 
-        example.setOrderByClause("module_id asc, sort_no asc");
+        example.setOrderByClause("module_id asc, sort_no asc, update_time desc");
         return apiMapper.selectByExample(example);
     }
 
@@ -37,7 +38,7 @@ public class ApiServiceImpl implements ApiService {
         ApiExample.Criteria criteria = example.createCriteria();
         criteria.andModuleIdEqualTo(moduleId);
 
-        example.setOrderByClause("sort_no asc");
+        example.setOrderByClause("sort_no asc, update_time desc");
         return apiMapper.selectByExample(example);
     }
 
@@ -70,11 +71,13 @@ public class ApiServiceImpl implements ApiService {
             api.setSortNo(calculateMaxSortNo(api.getModuleId()) + 1);
         }
 
+        Date now = new Date();
+        api.setUpdateTime(now);
         if (api.getId() == null) {
+            api.setCreateTime(now);
             apiMapper.insertSelective(api);
         } else {
-            // 注意这里没有Selective
-            apiMapper.updateByPrimaryKey(api);
+            apiMapper.updateByPrimaryKeySelective(api);
         }
 
         // 重新更新排序号

@@ -7,6 +7,7 @@ import com.f2boy.service.ApiModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class ApiModuleServiceImpl implements ApiModuleService {
     public List<ApiModule> allModule() {
         ApiModuleExample example = new ApiModuleExample();
 
-        example.setOrderByClause("sort_no asc");
+        example.setOrderByClause("sort_no asc, update_time desc");
         return apiModuleMapper.selectByExample(example);
 
     }
@@ -50,7 +51,10 @@ public class ApiModuleServiceImpl implements ApiModuleService {
             apiModule.setSortNo(calculateMaxSortNo() + 1);
         }
 
+        Date now = new Date();
+        apiModule.setUpdateTime(now);
         if (apiModule.getId() == null) {
+            apiModule.setCreateTime(now);
             apiModuleMapper.insertSelective(apiModule);
         } else {
             apiModuleMapper.updateByPrimaryKeySelective(apiModule);
@@ -84,7 +88,7 @@ public class ApiModuleServiceImpl implements ApiModuleService {
         }
     }
 
-    private void refreshSortNo(){
+    private void refreshSortNo() {
         List<ApiModule> allModule = allModule();
         for (int i = 0; i < allModule.size(); ++i) {
             ApiModule ele = allModule.get(i);
