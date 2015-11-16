@@ -23,7 +23,7 @@ public class ApiServiceImpl implements ApiService {
     public List<Api> allApi() {
         ApiExample example = new ApiExample();
 
-        example.setOrderByClause("module_id asc, sort_no asc, update_time desc");
+        example.setOrderByClause("module_id > 0 desc, module_id asc, sort_no asc, update_time desc");
         return apiMapper.selectByExample(example);
     }
 
@@ -106,8 +106,8 @@ public class ApiServiceImpl implements ApiService {
     @Override
     public int calculateMaxSortNo(int moduleId) {
 
-        if (moduleId <= 0) {
-            return 0;
+        if (moduleId < 0) {
+            moduleId = 0;
         }
 
         List<Api> apis = findByModule(moduleId);
