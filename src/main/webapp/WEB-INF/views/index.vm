@@ -130,6 +130,10 @@
         <td>901</td>
         <td>用户未登录或已过期</td>
       </tr>
+      <tr>
+        <td>902</td>
+        <td>权限不足</td>
+      </tr>
     </table>
 
     #foreach($module in $modules)
