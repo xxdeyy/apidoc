@@ -81,7 +81,6 @@ public class ApiController extends BaseController {
 
         if (api == null) {
             api = new Api();
-            api.setId(0);
             moduleId = moduleId == null ? 0 : moduleId;
             api.setModuleId(moduleId);
             api.setSortNo(apiService.calculateMaxSortNo(moduleId) + 1);
