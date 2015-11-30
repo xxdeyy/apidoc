@@ -297,6 +297,12 @@
     });
 
   });
+
+  // 左侧导航栏增加点击后的样式
+  $("a.list-group-item").click(function() {
+    $(this).css("background-color", "#f5f5f5").siblings().css("background-color", "");
+  });
+
 </script>
 </body>
 </html>
