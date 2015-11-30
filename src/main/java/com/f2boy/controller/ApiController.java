@@ -81,12 +81,10 @@ public class ApiController extends BaseController {
 
         if (api == null) {
             api = new Api();
+            api.setId(0);
+            moduleId = moduleId == null ? 0 : moduleId;
             api.setModuleId(moduleId);
-            if (moduleId == null) {
-                api.setSortNo(1);
-            } else {
-                api.setSortNo(apiService.calculateMaxSortNo(moduleId) + 1);
-            }
+            api.setSortNo(apiService.calculateMaxSortNo(moduleId) + 1);
         }
 
         mav.addObject("api", api);
@@ -95,6 +93,17 @@ public class ApiController extends BaseController {
         mav.addObject(CommonStatic.PAGE_TITLE_VAR, "新增\\编辑接口");
         mav.setViewName("api/edit");
         return mav;
+    }
+
+    /**
+     * 计算新增加的接口的排序号
+     */
+    @RequestMapping(value = "/calculateSortNo", method = RequestMethod.GET)
+    @ResponseBody
+    public int calculateSortNo(Integer moduleId) {
+        moduleId = moduleId == null ? 0 : moduleId;
+
+        return apiService.calculateMaxSortNo(moduleId) + 1;
     }
 
     /**

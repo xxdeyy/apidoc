@@ -271,14 +271,20 @@
   $(document).ready(function(){
 
     // 把对应的左侧导航按钮设为选中状态
+    var listItems = $("a.list-group-item");
     var path = window.location.hash;
-    $("a.list-group-item").css("background-color", "");
     var currItem = $("a.list-group-item[href='/" + path + "']");
     currItem.css("background-color", "#f5f5f5");
     var currColl = currItem.parent().parent();
     if (!currColl.hasClass("in")) {
       currColl.prev().find("a").click();
     }
+
+    // 左侧导航栏增加点击后的样式
+    listItems.click(function() {
+      listItems.css("background-color", "");
+      $(this).css("background-color", "#f5f5f5");
+    });
 
     // 保持左侧菜单距离顶部20px
     $(window).bind('scroll', function() {
@@ -296,11 +302,6 @@
       this.style.height = this.scrollHeight + 'px';
     });
 
-  });
-
-  // 左侧导航栏增加点击后的样式
-  $("a.list-group-item").click(function() {
-    $(this).css("background-color", "#f5f5f5").siblings().css("background-color", "");
   });
 
 </script>

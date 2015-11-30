@@ -5,12 +5,12 @@
   </ol>
 
   <form id="inputForm" class="form-horizontal" action="#springUrl('')/admin/api/save" method="post">
-    <input type="hidden" name="id" value="$!{api.id}" />
+    <input type="hidden" id="id" name="id" value="$!{api.id}" />
     <div class="form-group">
       <label for="moduleId" class="col-sm-2 control-label">模块 :</label>
       <div class="col-sm-3">
         <select class="form-control" id="moduleId" name="moduleId">
-          <option value="">请选择模块</option>
+          <option value="0">请选择模块</option>
           #foreach ($ele in $modules)
             <option value="$ele.id" #if($ele.id == $!{api.moduleId}) selected #end>$ele.name</option>
           #end
@@ -105,7 +105,11 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-3">
         <button id="submit_btn" type="button" class="btn btn-info">&nbsp;提&nbsp;交&nbsp;</button>
-        <a class="btn btn-default" href="#springUrl('')/admin/api/detail?id=$api.id">&nbsp;取&nbsp;消&nbsp;</a>
+        #if($api.id && $api.id > 0)
+          <a class="btn btn-default" href="#springUrl('')/admin/api/detail?id=$api.id">&nbsp;取&nbsp;消&nbsp;</a>
+        #else
+          <a class="btn btn-default" href="#springUrl('')/admin/api/list">&nbsp;取&nbsp;消&nbsp;</a>
+        #end
       </div>
     </div>
   </form>
@@ -114,6 +118,25 @@
 <script type="text/javascript">
 
   $(document).ready(function () {
+
+    var oldModuleId = $!{api.moduleId};
+    var oldSortNo = $!{api.sortNo};
+
+    $("#moduleId").change(function(){
+      var moduleId = $(this).val();
+      if (moduleId == oldModuleId) {
+        $("#sortNo").val(oldSortNo);
+      } else {
+        $.ajax({
+          url: "#springUrl('')/admin/api/calculateSortNo?moduleId=" + moduleId,
+          type: 'get',
+          dataType: "json",
+          success: function (sortNo) {
+            $("#sortNo").val(sortNo);
+          }
+        });
+      }
+    });
 
     $('#submit_btn').click(function () {
       $('#inputForm').ajaxSubmit({
