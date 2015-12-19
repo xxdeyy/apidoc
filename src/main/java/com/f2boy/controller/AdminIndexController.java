@@ -14,7 +14,7 @@ public class AdminIndexController extends BaseController {
     @RequestMapping("")
     public String index() {
 
-        return "forward:/admin/api/list";
+        return "redirect:/admin/api/list";
     }
 
 }

@@ -4,46 +4,63 @@
     <li>接口列表</li>
   </ol>
 
-  <div class="row">
-    <div class="col-sm-offset-6 col-sm-6">
-      <p class="text-right">
-        <a class="btn btn-info" href="#springUrl('')/admin/api/edit">添加</a>
-      </p>
-    </div>
-  </div>
-
-  <table class="table table-bordered">
-    <tr>
-      <th>模块名称</th>
-      <th>名称</th>
-      <th>URI</th>
-      <th>排序号</th>
-      <th>操作</th>
-    </tr>
-    #foreach ($ele in $list)
-      <tr>
-        #set($moduleName = "--")
+  <form id="listForm" action="" method="get">
+    <input type="hidden" id="moduleId" name="moduleId" value="$!moduleId" />
+    <div class="form-group dropdown pull-left">
+      <button class="btn btn-default dropdown-toggle" type="button" id="moduleSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        选择模块
+        <span class="caret"></span>
+      </button>
+      <ul id="moduleOption" class="dropdown-menu">
+        <li #if(!$moduleId) class="active" #end><a href="javascript:;" val="">全部</a></li>
         #foreach ($module in $modules)
-          #if($module.id == $ele.moduleId)
-            #set($moduleName = $module.name)
-            #break;
-          #end
+          <li #if($module.id == $moduleId) class="active" #end><a href="javascript:;" val="$module.id">$module.name</a></li>
         #end
-        <td>$moduleName</td>
-        <td><a href="#springUrl('')/admin/api/detail?id=${ele.id}">$ele.name</a></td>
-        <td>$ele.uri</td>
-        <td>$ele.sortNo</td>
-        <td>
-          <a href="#springUrl('')/admin/api/edit?id=${ele.id}">修改</a>
-          <a href="javascript:void(0)" onclick="doDelete(${ele.id}, '${ele.name}')">删除</a>
-        </td>
+      </ul>
+    </div>
+
+    <table class="table table-bordered">
+      <tr>
+        <th>模块名称</th>
+        <th>名称</th>
+        <th>URI</th>
+        <th>排序号</th>
+        <th>操作</th>
       </tr>
-    #end
-  </table>
+      #foreach ($ele in $list)
+        <tr>
+          #set($moduleName = "--")
+          #foreach ($module in $modules)
+            #if($module.id == $ele.moduleId)
+              #set($moduleName = $module.name)
+              #break;
+            #end
+          #end
+          <td>$moduleName</td>
+          <td><a href="#springUrl('')/admin/api/detail?id=${ele.id}">$ele.name</a></td>
+          <td>$ele.uri</td>
+          <td>$ele.sortNo</td>
+          <td>
+            <a href="#springUrl('')/admin/api/edit?id=${ele.id}">修改</a>
+            <a href="javascript:void(0)" onclick="doDelete(${ele.id}, '${ele.name}')">删除</a>
+          </td>
+        </tr>
+      #end
+    </table>
+  </form>
+
 </div>
 
 
 <script>
+
+  // 选择模块搜索
+  $("#moduleOption a").click( function() {
+    $("#moduleId").val($(this).attr("val"));
+    $("#listForm").submit();
+    return false;
+  });
+
   function doDelete(id, name) {
     if (confirm("确定要删除[" + name + "]吗？")) {
       $.ajax({

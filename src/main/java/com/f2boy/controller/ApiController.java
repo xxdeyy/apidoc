@@ -45,6 +45,7 @@ public class ApiController extends BaseController {
         }
         mav.addObject("list", list);
         mav.addObject("modules", apiModuleService.allModule());
+        mav.addObject("moduleId", moduleId);
 
         mav.addObject(CommonStatic.PAGE_TITLE_VAR, "接口列表");
         mav.setViewName("api/list");
