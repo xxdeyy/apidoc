@@ -30,23 +30,33 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="method" class="col-sm-2 control-label"><i class="must-star">*</i>METHOD :</label>
-      <div class="col-sm-3">
-        <label class="radio-inline">
-          <input type="radio" name="method" value="GET" #if($api.method == 'GET') checked #end>GET
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="method" value="POST" #if($api.method == 'POST') checked #end>POST
-        </label>
-      </div>
-    </div>
-    <div class="form-group">
       <label for="function" class="col-sm-2 control-label">用途 :</label>
       <div class="col-sm-8">
         <input type="text" class="form-control" id="function" name="function" value="$!{api.function}" />
       </div>
     </div>
     <div class="form-group">
+      <label for="method" class="col-sm-2 control-label"><i class="must-star">*</i>METHOD :</label>
+      <div class="col-sm-2">
+        <label class="radio-inline">
+          <input type="radio" name="method" value="GET" #if($api.method == 'GET') checked #end />GET
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="method" value="POST" #if($api.method == 'POST') checked #end />POST
+        </label>
+      </div>
+      <label for="contentType" id="contentTypeLabel" class="col-sm-2 control-label"
+             #if($api.method != 'POST') style="display: none;" #end>content-type :</label>
+      <div class="col-sm-3" id="contentTypeDiv" #if($api.method != 'POST') style="display: none;" #end>
+        <label class="radio-inline">
+          <input type="radio" name="contentType" value="form" #if($api.contentType != 'json') checked #end />form
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="contentType" value="json" #if($api.contentType == 'json') checked #end />json
+        </label>
+      </div>
+    </div>
+    <div class="form-group" id="paramsDiv" #if($api.contentType == 'json') style="display: none;" #end>
       <label for="params" class="col-sm-2 control-label">请求参数 :</label>
       <div class="col-sm-10">
         <table class="table table-bordered" id="paramsTable">
@@ -78,10 +88,16 @@
         </table>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" id="paramsDiv2" #if($api.contentType == 'json') style="display: none;" #end>
       <div class="col-sm-2"></div>
       <div class="col-sm-3">
         <a class="btn btn-info" href="javascript:void(0)" onclick="addParam()">新增参数</a>
+      </div>
+    </div>
+    <div class="form-group" id="jsonParamsDiv" #if($api.contentType != 'json') style="display: none;" #end>
+      <label for="jsonParams" class="col-sm-2 control-label">请求参数 :</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="jsonParams" name="jsonParams" rows="15">$!{api.jsonParams}</textarea>
       </div>
     </div>
     <div class="form-group">
@@ -157,9 +173,37 @@
     };
 
     // 初始textarea大小
-    var elem = $("textarea")[0];
-    elem.style.height = elem.scrollHeight + 'px';
+    var elem1 = $("textarea#response")[0]; // 响应数据的textarea
+    elem1.style.height = elem1.scrollHeight + 'px';
+    var elem2 = $("textarea#jsonParams")[0]; // 请求参数的textarea
+    elem2.style.height = elem1.style.height;
 
+  });
+
+  $("input[name='method']").click(function(){
+    if ($(this).val() == "POST") {
+      $("#contentTypeLabel").show();
+      $("#contentTypeDiv").show();
+    } else {
+      $("#contentTypeLabel").hide();
+      $("#contentTypeDiv").hide();
+      $("#jsonParamsDiv").hide();
+      $("#paramsDiv").show();
+      $("#paramsDiv2").show();
+      $("input[name='contentType']").attr("checked",false);
+    }
+  });
+
+  $("input[name='contentType']").click(function(){
+    if ($(this).val() == "json") {
+      $("#jsonParamsDiv").show();
+      $("#paramsDiv").hide();
+      $("#paramsDiv2").hide();
+    } else {
+      $("#jsonParamsDiv").hide();
+      $("#paramsDiv").show();
+      $("#paramsDiv2").show();
+    }
   });
 
   function deleteParam(elem) {

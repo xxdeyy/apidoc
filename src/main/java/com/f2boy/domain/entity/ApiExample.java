@@ -540,6 +540,76 @@ public class ApiExample {
             return (Criteria) this;
         }
 
+        public Criteria andContentTypeIsNull() {
+            addCriterion("content_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeIsNotNull() {
+            addCriterion("content_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeEqualTo(String value) {
+            addCriterion("content_type =", value, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeNotEqualTo(String value) {
+            addCriterion("content_type <>", value, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeGreaterThan(String value) {
+            addCriterion("content_type >", value, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("content_type >=", value, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeLessThan(String value) {
+            addCriterion("content_type <", value, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeLessThanOrEqualTo(String value) {
+            addCriterion("content_type <=", value, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeLike(String value) {
+            addCriterion("content_type like", value, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeNotLike(String value) {
+            addCriterion("content_type not like", value, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeIn(List<String> values) {
+            addCriterion("content_type in", values, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeNotIn(List<String> values) {
+            addCriterion("content_type not in", values, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeBetween(String value1, String value2) {
+            addCriterion("content_type between", value1, value2, "contentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentTypeNotBetween(String value1, String value2) {
+            addCriterion("content_type not between", value1, value2, "contentType");
+            return (Criteria) this;
+        }
+
         public Criteria andParamsIsNull() {
             addCriterion("params is null");
             return (Criteria) this;
@@ -607,6 +677,76 @@ public class ApiExample {
 
         public Criteria andParamsNotBetween(ApiParams value1, ApiParams value2) {
             addParamsCriterion("params not between", value1, value2, "params");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsIsNull() {
+            addCriterion("json_params is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsIsNotNull() {
+            addCriterion("json_params is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsEqualTo(String value) {
+            addCriterion("json_params =", value, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsNotEqualTo(String value) {
+            addCriterion("json_params <>", value, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsGreaterThan(String value) {
+            addCriterion("json_params >", value, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsGreaterThanOrEqualTo(String value) {
+            addCriterion("json_params >=", value, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsLessThan(String value) {
+            addCriterion("json_params <", value, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsLessThanOrEqualTo(String value) {
+            addCriterion("json_params <=", value, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsLike(String value) {
+            addCriterion("json_params like", value, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsNotLike(String value) {
+            addCriterion("json_params not like", value, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsIn(List<String> values) {
+            addCriterion("json_params in", values, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsNotIn(List<String> values) {
+            addCriterion("json_params not in", values, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsBetween(String value1, String value2) {
+            addCriterion("json_params between", value1, value2, "jsonParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsonParamsNotBetween(String value1, String value2) {
+            addCriterion("json_params not between", value1, value2, "jsonParams");
             return (Criteria) this;
         }
 

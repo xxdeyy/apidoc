@@ -23,8 +23,14 @@ public class Api implements Serializable {
     /** 功能 */
     private String function;
 
-    /** 请求参数 */
+    /** 请求的content-type，分为form和json */
+    private String contentType;
+
+    /** 请求参数。这里存储的是json，应用程序负责转化 */
     private ApiParams params;
+
+    /** 请求参数直接为json格式 */
+    private String jsonParams;
 
     /** 响应数据 */
     private String response;
@@ -91,12 +97,28 @@ public class Api implements Serializable {
         this.function = function == null ? null : function.trim();
     }
 
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType == null ? null : contentType.trim();
+    }
+
     public ApiParams getParams() {
         return params;
     }
 
     public void setParams(ApiParams params) {
         this.params = params;
+    }
+
+    public String getJsonParams() {
+        return jsonParams;
+    }
+
+    public void setJsonParams(String jsonParams) {
+        this.jsonParams = jsonParams == null ? null : jsonParams.trim();
     }
 
     public String getResponse() {

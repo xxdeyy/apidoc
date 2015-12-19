@@ -131,6 +131,10 @@ public class ApiController extends BaseController {
             return map;
         }
 
+        if (StringUtils.isBlank(api.getContentType())) {
+            api.setContentType("form");
+        }
+
         if (StringUtils.isBlank(api.getResponse())) {
             map.put("info", "响应参数不能为空");
             return map;
