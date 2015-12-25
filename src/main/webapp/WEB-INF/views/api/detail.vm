@@ -114,10 +114,9 @@
 
 <script>
   $(document).ready(function(){
-    // 初始textarea大小
-    var elem1 = $("textarea#response")[0]; // 响应数据的textarea
-    elem1.style.height = elem1.scrollHeight + 'px';
-    var elem2 = $("textarea#jsonParams")[0]; // 请求参数的textarea
-    elem2.style.height = elem1.style.height;
+    // testarea区域全显示
+    $("textarea").each(function(){
+      this.style.height = this.scrollHeight + 'px';
+    });
   });
 </script>
