@@ -99,7 +99,7 @@
       <tr>
         <td>msg</td>
         <td>string</td>
-        <td>结果信息, 如“成功添加处置”</td>
+        <td>结果信息, 如“添加成功”</td>
       </tr>
       <tr>
         <td>data</td>
